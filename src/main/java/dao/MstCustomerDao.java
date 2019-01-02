@@ -17,6 +17,9 @@ public interface MstCustomerDao extends JpaRepository<MstCustomer, MstCustomerPK
 	@Query(value ="select KODE_CUSTOMER,NAMA_KOTA from MST_CUSTOMER join MST_KOTA on MST_CUSTOMER.KODE_KOTA = MST_KOTA.KODE_KOTA",nativeQuery=true)
 	public List<Object[]> findAllDataCustumberNative();
 	
-	@Query(value ="select a from MstCustomer a where a.kodeCustomer =:cari or a.namaCustomer =:cari")
+	@Query(value ="select a from MstCustomer a where a.kodeCustomer like :cari or a.namaCustomer like :cari")
 	public List<MstCustomer> findDataBySearch(@Param("cari")String cari);
+	
+	@Query(value ="select a from MstCustomer a where a.kodeCustomer =:cari")
+	public MstCustomer findOneku(@Param("cari")String cari);
 }
