@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,4 +23,7 @@ public interface MstCustomerDao extends JpaRepository<MstCustomer, MstCustomerPK
 	
 	@Query(value ="select a from MstCustomer a where a.kodeCustomer =:cari")
 	public MstCustomer findOneku(@Param("cari")String cari);
+	
+	@Query(value ="select a from MstCustomer a where a.kodeCustomer like :cari or a.namaCustomer like :cari")
+	public List<MstCustomer> findDataBySearchAndSort(@Param("cari")String cari, Sort sorting);
 }

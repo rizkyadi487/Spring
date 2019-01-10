@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.domain.Sort;
 
 import service.MstCustomerSvc;
 import dao.*;
@@ -16,10 +17,23 @@ public class tes {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"/META-INF/spring/app-config.xml");
 
+		
+		
+		
+		
+		
 		// System.out.println("Tes Database");
 
 		// MstBarangDao mstBarangDao = ctx.getBean(MstBarangDao.class);
-		// MstCustomerDao mstCustomerDao = ctx.getBean(MstCustomerDao.class);
+		 MstCustomerDao mstCustomerDao = ctx.getBean(MstCustomerDao.class);
+		 
+		 Sort sorting = new Sort(Sort.Direction.ASC, "namaCustomer");
+		 
+		 List<MstCustomer> list = mstCustomerDao.findDataBySearchAndSort("%hi%",sorting);
+		 for(MstCustomer m : list){
+			 System.out.println(m.getKodeCustomer()+" - "+m.getNamaCustomer());
+		 }
+		 
 		// MstKaryawanDao mstKaryawanDao = ctx.getBean(MstKaryawanDao.class);
 		// MstKotaDao mstKotaDao = ctx.getBean(MstKotaDao.class);
 		// MstProvinsiDao mstProvinsiDao = ctx.getBean(MstProvinsiDao.class);
